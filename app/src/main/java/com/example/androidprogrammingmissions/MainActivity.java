@@ -26,7 +26,12 @@ public class MainActivity extends AppCompatActivity {
     class ClickEvent implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            showToast("" + "button clicked!");
+            if(view == verificationBtn) {
+                showToast(getString(R.string.ok) + " button is clicked");
+            }
+            else if(view == settingBtn) {
+                showToast(getString(R.string.ok) + " button is clicked");
+            }
         }
     }
 
