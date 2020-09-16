@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">AndroidProgrammingMissions</string>
+    <string name="title">Send and receive SMS from Messenger.</string>
+    <string name="description">Manage all of your conversations in one place and use stickers and chat heads. SMS conversations are displayed separately in Messenger and are Only available via a mobile phone. Standard text message charges will be charged.</string>
+    <string name="ok">OK</string>
+    <string name="setting">Setting</string>
+    <string name="icon">messenger image</string>
 </resources>
