@@ -53,39 +53,50 @@
 
         <EditText
             android:id="@+id/last_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="84dp"
+            android:layout_marginEnd="24dp"
             app:layout_constraintLeft_toRightOf="@id/icon_person_small"
             app:layout_constraintTop_toTopOf="@+id/icon_person_small"
-            android:inputType="text"/>
+            android:inputType="text"
+            android:hint="성"/>
 
         <EditText
             android:id="@+id/name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="84dp"
+            android:layout_marginEnd="24dp"
             app:layout_constraintLeft_toRightOf="@id/spacer"
             app:layout_constraintStart_toStartOf="@+id/last_name"
             app:layout_constraintTop_toTopOf="@+id/spacer"
-            android:inputType="text"/>
+            android:inputType="text"
+            android:hint="이름"/>
 
         <EditText
             android:id="@+id/phone_number"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="84dp"
+            android:layout_marginEnd="24dp"
             app:layout_constraintLeft_toRightOf="@id/icon_phone"
             app:layout_constraintStart_toStartOf="@+id/name"
             app:layout_constraintTop_toTopOf="@+id/icon_phone"
-            android:inputType="phone"/>
+            android:inputType="phone"
+            android:hint="전화"/>
 
         <EditText
             android:id="@+id/email"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="84dp"
+            android:layout_marginEnd="24dp"
             app:layout_constraintLeft_toRightOf="@id/icon_email"
             app:layout_constraintStart_toStartOf="@+id/phone_number"
             app:layout_constraintTop_toTopOf="@+id/icon_email"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress"
+            android:hint="이메일"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
