@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/icon_person_large"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_person_large"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/icon_person_small"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_margin="24dp"
+            android:src="@drawable/icon_person_small"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/icon_person_large" />
+
+        <View
+            android:id="@+id/spacer"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_margin="24dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/icon_person_small" />
+
+        <ImageView
+            android:id="@+id/icon_phone"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_margin="24dp"
+            android:src="@drawable/icon_phone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spacer" />
+
+        <ImageView
+            android:id="@+id/icon_email"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_margin="24dp"
+            android:src="@drawable/icon_email"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/icon_phone" />
+
+        <EditText
+            android:id="@+id/last_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            app:layout_constraintLeft_toRightOf="@id/icon_person_small"
+            app:layout_constraintTop_toTopOf="@+id/icon_person_small"
+            android:inputType="text"/>
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/spacer"
+            app:layout_constraintStart_toStartOf="@+id/last_name"
+            app:layout_constraintTop_toTopOf="@+id/spacer"
+            android:inputType="text"/>
+
+        <EditText
+            android:id="@+id/phone_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/icon_phone"
+            app:layout_constraintStart_toStartOf="@+id/name"
+            app:layout_constraintTop_toTopOf="@+id/icon_phone"
+            android:inputType="phone"/>
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/icon_email"
+            app:layout_constraintStart_toStartOf="@+id/phone_number"
+            app:layout_constraintTop_toTopOf="@+id/icon_email"
+            android:inputType="textEmailAddress"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

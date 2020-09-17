@@ -1,3 +1,4 @@
+include ':part2_mission3_address_book'
 include ':part2_mission2_brunch'
 include ':app'
 rootProject.name = "AndroidProgrammingMissions"
