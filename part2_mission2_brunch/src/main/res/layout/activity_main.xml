@@ -14,12 +14,12 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/icon_close"
-            android:contentDescription="닫기"/>
+            android:contentDescription="@string/close_icon_content_description"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="글쓰기"
+            android:text="@string/page_title"
             android:textSize="24sp"
             android:layout_gravity="center"
             android:gravity="center"/>
@@ -27,27 +27,51 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/icon_ok"
-            android:contentDescription="확인"/>
+            android:contentDescription="@string/finish_icon_content_description"/>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="8dp"
+        android:background="#D3D0D0"/>
     <!-- 중간 -->
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="제목"
+        android:hint="@string/title_hint"
         android:maxLines="1"
-        android:inputType="text"/>
+        android:inputType="text"
+        android:background="@null"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="8dp"
+        android:background="#D3D0D0"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="소제목"
+        android:hint="@string/subtitle_hint"
         android:maxLines="1"
-        android:inputType="text"/>
+        android:inputType="text"
+        android:background="@null"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="8dp"
+        android:background="#D3D0D0"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:hint="내용을 입력하세요."
+        android:hint="@string/content_hint"
         android:layout_weight="1"
-        android:inputType="none"/>
+        android:inputType="textMultiLine"
+        android:background="@null"
+        android:gravity="top"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="8dp"
+        android:background="#D3D0D0"/>
     <!-- 하단 -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -56,17 +80,17 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:contentDescription="사진 첨부"
+            android:contentDescription="@string/photo_icon_content_description"
             android:src="@drawable/icon_photo"/>
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:contentDescription="글자 색깔"
+            android:contentDescription="@string/text_color_icon_content_description"
             android:src="@drawable/icon_color"/>
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:contentDescription="문단 정렬"
+            android:contentDescription="@string/text_align_icon_content_description"
             android:src="@drawable/icon_align"/>
     </LinearLayout>
 

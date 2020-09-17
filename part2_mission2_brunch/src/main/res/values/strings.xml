@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Part2_mission2_brunch</string>
+    <string name="page_title">글쓰기</string>
+    <string name="title_hint">제목</string>
+    <string name="subtitle_hint">소제목</string>
+    <string name="content_hint">내용을 입력하세요.</string>
+    <string name="close_icon_content_description">닫기</string>
+    <string name="finish_icon_content_description">완료</string>
+    <string name="photo_icon_content_description">사진 첨부</string>
+    <string name="text_color_icon_content_description">글씨 색깔</string>
+    <string name="text_align_icon_content_description">문단 정렬</string>
 </resources>
