@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.Image;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -36,6 +37,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         showToast("원래는 이 이미지를 터치하면 각각 어떤 이미지가 눌렸는지 처리를 해야하지만 그러기엔 내가 귀찮아서 안 했으니 이 화면을 보고있는 네가 이해해줘");
+    }
+
+    // 종료 이벤트
+    float initTime = 0;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK && event.getEventTime()-initTime > 3000) {
+            showToast("종료하려면 한 번 더 누르세요.");
+            initTime = event.getEventTime();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     void showToast(String msg) {
