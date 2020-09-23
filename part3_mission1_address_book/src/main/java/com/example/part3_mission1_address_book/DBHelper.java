@@ -13,7 +13,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String query = "create table tb_emails " +
+        String query = "create table tb_addresses " +
                 "(_id integer primary key autoincrement, " +
                 "name, " +
                 "phone, " +
@@ -24,7 +24,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         if(newVersion == DATABASE_VERSION) {
-            sqLiteDatabase.execSQL("drop table tb_emails");
+            sqLiteDatabase.execSQL("drop table tb_addresses");
             onCreate(sqLiteDatabase);
         }
     }
