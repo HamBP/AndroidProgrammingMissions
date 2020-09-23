@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/icon_person_large"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_person_large"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:id="@+id/icon_person_small"
+            android:layout_margin="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_person_small"
+            app:layout_constraintTop_toBottomOf="@id/icon_person_large"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <ImageView
+            android:id="@+id/icon_phone"
+            android:layout_margin="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_phone"
+            app:layout_constraintTop_toBottomOf="@id/icon_person_small"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <ImageView
+            android:id="@+id/icon_email"
+            android:layout_margin="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_email"
+            app:layout_constraintTop_toBottomOf="@id/icon_phone"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <EditText
+            android:id="@+id/input_name"
+            android:layout_marginStart="68dp"
+            android:layout_marginEnd="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="이름"
+            android:inputType="text"
+            app:layout_constraintLeft_toRightOf="@id/icon_person_small"
+            app:layout_constraintTop_toTopOf="@+id/icon_person_small" />
+
+        <EditText
+            android:id="@+id/input_phone_number"
+            android:layout_marginStart="68dp"
+            android:layout_marginEnd="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="전화번호"
+            android:inputType="phone"
+            app:layout_constraintLeft_toRightOf="@id/icon_phone"
+            app:layout_constraintTop_toTopOf="@+id/icon_phone" />
+
+        <EditText
+            android:id="@+id/input_email_address"
+            android:layout_marginStart="68dp"
+            android:layout_marginEnd="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="이메일"
+            android:inputType="textEmailAddress"
+            app:layout_constraintLeft_toRightOf="@id/icon_email"
+            app:layout_constraintTop_toTopOf="@+id/icon_email" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/input_email_address"
+            android:text="ADD"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
