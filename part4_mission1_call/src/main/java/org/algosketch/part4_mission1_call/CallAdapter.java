@@ -37,11 +37,12 @@ public class CallAdapter extends ArrayAdapter<CallVO> {
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater.inflate(resId, null);
 
-        ImageView profileImageView = convertView.findViewById(R.id.img_profile);
-        TextView nameView = convertView.findViewById(R.id.text_name);
-        TextView dateView = convertView.findViewById(R.id.text_date);
-        ImageView callView = convertView.findViewById(R.id.img_dialer);
-
+        if(convertView == null) {
+            ImageView profileImageView = convertView.findViewById(R.id.img_profile);
+            TextView nameView = convertView.findViewById(R.id.text_name);
+            TextView dateView = convertView.findViewById(R.id.text_date);
+            ImageView callView = convertView.findViewById(R.id.img_dialer);
+        }
         final CallVO vo = datas.get(position);
 
         if(vo.photo) profileImageView.setImageResource(R.drawable.hong);
