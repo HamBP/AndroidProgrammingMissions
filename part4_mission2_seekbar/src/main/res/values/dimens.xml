@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dount_size">200dp</dimen>
+    <dimen name="dount_stroke_size">15dp</dimen>
+    <dimen name="dount_textSize">20sp</dimen>
+</resources>
