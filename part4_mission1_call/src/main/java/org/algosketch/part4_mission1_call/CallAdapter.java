@@ -1,6 +1,7 @@
 package org.algosketch.part4_mission1_call;
 
 import android.content.Context;
+import android.telecom.Call;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,15 +35,19 @@ public class CallAdapter extends ArrayAdapter<CallVO> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView = inflater.inflate(resId, null);
-
         if(convertView == null) {
-            ImageView profileImageView = convertView.findViewById(R.id.img_profile);
-            TextView nameView = convertView.findViewById(R.id.text_name);
-            TextView dateView = convertView.findViewById(R.id.text_date);
-            ImageView callView = convertView.findViewById(R.id.img_dialer);
+            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(resId, null);
+            CallHolder holder = new CallHolder(convertView);
+            convertView.setTag(holder);
         }
+        CallHolder holder = (CallHolder) convertView.getTag();
+
+        ImageView profileImageView = holder.profileImageView;
+        TextView nameView = holder.nameView;
+        TextView dateView = holder.dateView;
+        ImageView callView = holder.callView;
+
         final CallVO vo = datas.get(position);
 
         if(vo.photo) profileImageView.setImageResource(R.drawable.hong);
