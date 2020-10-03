@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/part2_mission3_address_book" />
             <option value="$PROJECT_DIR$/part3_mission1_address_book" />
             <option value="$PROJECT_DIR$/part4_mission1_call" />
+            <option value="$PROJECT_DIR$/part4_mission2_seekbar" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
