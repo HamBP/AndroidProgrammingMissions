@@ -1,7 +1,9 @@
 package org.algosketch.part4_mission1_call;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.telecom.Call;
 import android.view.LayoutInflater;
@@ -14,6 +16,8 @@ import android.widget.TextView;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 
@@ -60,7 +64,17 @@ public class CallAdapter extends ArrayAdapter<CallVO> {
         callView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.startActivity(new Intent("android.intent.action.CALL", Uri.parse("tell:" + vo.phone)));
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:" + vo.phone));
+                if(ContextCompat.checkSelfPermission(view.getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions((MainActivity)context, new String[]{Manifest.permission.CALL_PHONE}, 200);
+                } else {
+                    try {
+                        view.getContext().startActivity(intent);
+                    } catch (SecurityException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
 
