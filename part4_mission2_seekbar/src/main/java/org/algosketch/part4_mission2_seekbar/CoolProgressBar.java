@@ -14,17 +14,14 @@ public class CoolProgressBar extends View {
     Context context;
     int progress;
 
-    ArrayList<OnChangeListener> listeners;
-
     public CoolProgressBar(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
-        init(attrs);
+        init();
     }
 
-    private void init(AttributeSet attrs) {
+    private void init() {
         progress = 80;
-        listeners = new ArrayList<>();
     }
 
     public void onChange(int progress) {
@@ -62,9 +59,9 @@ public class CoolProgressBar extends View {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(getResources().getDimensionPixelSize(R.dimen.dount_stroke_size));
 
-        paint.setColor(getResources().getColor(R.color.gray));
+        paint.setColor(Color.GRAY);
         canvas.drawArc(arcRect, -90, 360, false, paint);
-        paint.setColor(getResources().getColor(R.color.barColor));
+        paint.setColor(Color.RED);
         canvas.drawArc(arcRect, -90, progress, false, paint);
 
         // text 그리기
