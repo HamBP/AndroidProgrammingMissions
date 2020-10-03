@@ -1,6 +1,8 @@
 package org.algosketch.part4_mission1_call;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.telecom.Call;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +52,7 @@ public class CallAdapter extends ArrayAdapter<CallVO> {
 
         final CallVO vo = datas.get(position);
 
-        if(vo.photo) profileImageView.setImageResource(R.drawable.hong);
+        if(vo.photo > 0) profileImageView.setImageResource(R.drawable.hong);
         else profileImageView.setImageResource(R.drawable.ic_person);
         nameView.setText(vo.name);
         dateView.setText(vo.phoneType + ", " + vo.date);
@@ -58,7 +60,7 @@ public class CallAdapter extends ArrayAdapter<CallVO> {
         callView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO : 전화 걸기
+                context.startActivity(new Intent("android.intent.action.CALL", Uri.parse("tell:" + vo.phone)));
             }
         });
 
