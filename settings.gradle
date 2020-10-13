@@ -1,3 +1,4 @@
+include ':part5_mission1_camera'
 include ':part4_mission3_autocomplete'
 include ':part4_mission2_seekbar'
 include ':part4_mission1_call'

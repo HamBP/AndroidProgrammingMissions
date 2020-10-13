@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/part4_mission1_call" />
             <option value="$PROJECT_DIR$/part4_mission2_seekbar" />
             <option value="$PROJECT_DIR$/part4_mission3_autocomplete" />
+            <option value="$PROJECT_DIR$/part5_mission1_camera" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
