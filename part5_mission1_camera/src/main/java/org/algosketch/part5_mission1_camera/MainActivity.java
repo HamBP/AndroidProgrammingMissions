@@ -2,6 +2,7 @@ package org.algosketch.part5_mission1_camera;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -13,22 +14,31 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.text.Layout;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.MediaController;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.net.URI;
 
 public class MainActivity extends AppCompatActivity {
     ImageView addPhotoBtn;
     File filePath;
-    //ImageView resultView;
+    RelativeLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         addPhotoBtn = findViewById(R.id.main_photo_icon);
-        //resultView = findViewById(R.id.result_view);
+        layout = findViewById(R.id.main_content);
         addPhotoBtn.setOnClickListener(new AddPhotoBtnOnClickListener());
     }
 
@@ -50,15 +60,14 @@ public class MainActivity extends AppCompatActivity {
                     .setItems(strings, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                                if(true) { // 사진
-                                    try{
-                                        String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/myApp";
-                                        File dir = new File(dirPath);
-                                        if(!dir.exists()) {
-                                            dir.mkdir();
-                                        }
-                                        Toast.makeText(MainActivity.this, "11", Toast.LENGTH_SHORT).show();
+                                String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/myApp";
+                                File dir = new File(dirPath);
+                                if(!dir.exists()) {
+                                    dir.mkdir();
+                                }
 
+                                if(which == 0) { // 사진
+                                    try{
                                         filePath = File.createTempFile("IMG", ".jpg", dir);
                                         if(!filePath.exists()) {
                                             filePath.createNewFile();
@@ -72,7 +81,23 @@ public class MainActivity extends AppCompatActivity {
                                         e.printStackTrace();
                                     }
                                 } else if(which == 1) { // 동영상
+                                    try{
+                                        filePath = File.createTempFile("VIDEO", ".mp4", dir);
+                                        if(!filePath.exists()) {
+                                            filePath.createNewFile();
+                                        }
+                                        Uri videoURI = FileProvider.getUriForFile(MainActivity.this, BuildConfig.APPLICATION_ID + ".provider", filePath);
 
+                                        Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+                                        intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 0);
+                                        intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 20);
+                                        intent.putExtra(MediaStore.EXTRA_SIZE_LIMIT, 1024*1024*10);
+                                        intent.putExtra(MediaStore.EXTRA_OUTPUT, videoURI);
+
+                                        startActivityForResult(intent, 8);
+                                    } catch(Exception e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                             } else { // 퍼미션이 없을 때
                                 ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
@@ -87,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 4 && resultCode == RESULT_OK) {
+        if(requestCode == 4 && resultCode == RESULT_OK) { // 사진
             if(filePath != null) {
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inJustDecodeBounds = true;
@@ -102,10 +127,31 @@ public class MainActivity extends AppCompatActivity {
                 BitmapFactory.Options imgOptions = new BitmapFactory.Options();
                 imgOptions.inSampleSize = 2;
                 Bitmap bitmap = BitmapFactory.decodeFile(filePath.getAbsolutePath(), imgOptions);
-                //resultView.setImageBitmap(bitmap);
-            }
-        } else if(requestCode == 8 && resultCode == RESULT_OK) {
 
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+
+                ImageView imageView = new ImageView(MainActivity.this);
+                imageView.setImageBitmap(bitmap);
+
+                layout.addView(imageView, params);
+            }
+        } else if(requestCode == 8 && resultCode == RESULT_OK) { // 동영상
+            VideoView videoView = new VideoView(MainActivity.this);
+            videoView.setMediaController(new MediaController(MainActivity.this));
+            Uri videoUri = Uri.parse(filePath.getAbsolutePath());
+            MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+            Bitmap bmp = null;
+            retriever.getFrameAtTime();
+            int videoHeight = bmp.getHeight();
+            int videoWidth = bmp.getWidth();
+            videoView.setVideoURI(videoUri);
+
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(500, 500);
+            params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            layout.addView(videoView, params);
+
+            videoView.start();
         }
     }
 }
