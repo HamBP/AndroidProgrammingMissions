@@ -1,3 +1,4 @@
+include ':part6_mission2'
 include ':part6_mission1'
 include ':part5_mission2'
 include ':part5_mission1_camera'
