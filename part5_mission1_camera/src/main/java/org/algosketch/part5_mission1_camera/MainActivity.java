@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setTitle("촬영")
-                    .setItems(strings, new DialogInterface.OnClickListener() {
+                    .setItems(R.array.capture, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                                 String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/myApp";
