@@ -6,7 +6,10 @@ import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Rect;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +18,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,16 +27,39 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        DBHelper helper = new DBHelper(this);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        Cursor todayCursor = db.rawQuery("select * from tb_data where date = '2019-07-01'", null);
+        Cursor yesterdayCursor = db.rawQuery("select * from tb_data where date = '2019-06-30'", null);
+        Cursor beforeCursor = db.rawQuery("select * from tb_data where date != '2019-07-01' and date != '2019-06-30'", null);
+
         List<ItemVO> list = new ArrayList<>();
-        for(int i = 0; i < 10; ++i) {
-            if(i % 3 == 0) {
-                HeaderVO vo = new HeaderVO();
-                vo.title = "어제";
-                list.add(vo);
-            } else {
-                DataVO vo = new DataVO("이름", "날짜" + i);
-                list.add(vo);
-            }
+        HeaderVO vo = new HeaderVO();
+        vo.title = "오늘";
+        list.add(vo);
+        while(todayCursor.moveToNext()) {
+            String name = todayCursor.getString(1);
+            String date = todayCursor.getString(2);
+            DataVO dvo = new DataVO(name, date);
+            list.add(dvo);
+        }
+        vo = new HeaderVO();
+        vo.title = "어제";
+        list.add(vo);
+        while(yesterdayCursor.moveToNext()) {
+            String name = yesterdayCursor.getString(1);
+            String date = yesterdayCursor.getString(2);
+            DataVO dvo = new DataVO(name, date);
+            list.add(dvo);
+        }
+        vo = new HeaderVO();
+        vo.title = "이전";
+        list.add(vo);
+        while(beforeCursor.moveToNext()) {
+            String name = beforeCursor.getString(1);
+            String date = beforeCursor.getString(2);
+            DataVO dvo = new DataVO(name, date);
+            list.add(dvo);
         }
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
@@ -50,6 +77,25 @@ public class MainActivity extends AppCompatActivity {
                 outRect.set(16, 16, 16, 16);
                 view.setBackgroundColor(0xFFFFFFFF);
                 ViewCompat.setElevation(view, 20.0f);
+                int rand = new Random().nextInt(6);
+                switch (rand) {
+                    case 1:
+                        ((GradientDrawable)view.findViewById(R.id.mission3__item_person).getBackground()).setColor(0xFFFE2E2E);
+                        break;
+                    case 2:
+                        ((GradientDrawable)view.findViewById(R.id.mission3__item_person).getBackground()).setColor(0xFFFF8000);
+                        break;
+                    case 3:
+                        ((GradientDrawable)view.findViewById(R.id.mission3__item_person).getBackground()).setColor(0xFFF7FE2E);
+                        break;
+                    case 4:
+                        ((GradientDrawable)view.findViewById(R.id.mission3__item_person).getBackground()).setColor(0xFF2EFE2E);
+                        break;
+                    case 5:
+                        ((GradientDrawable)view.findViewById(R.id.mission3__item_person).getBackground()).setColor(0xFF2EFEF7);
+                        break;
+                    default:
+                }
             }
         }
     }
