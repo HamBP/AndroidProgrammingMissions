@@ -37,33 +37,9 @@ public class MainActivity extends AppCompatActivity {
         todayMaxTemperature = findViewById(R.id.today_max_temperature);
         todayMinTemperature = findViewById(R.id.today_min_temperature);
         currentTemperature = findViewById(R.id.current_temperature);
-/*
-        queue = Volley.newRequestQueue(this);
-        JsonObjectRequest jsonTodayRequest = new JsonObjectRequest(Request.Method.GET, "https://api.openweathermap.org/data/2.5/weather?q=seoul&mode=json&units=metric&appid=" + API_KEY,
-                null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONObject main = response.getJSONObject("main");
-                    currentTemperature.setText(valueOf(main.getDouble("temp")));
-                    todayMaxTemperature.setText(valueOf(main.getDouble("temp_max")));
-                    todayMinTemperature.setText(valueOf(main.getDouble("temp_min")));
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-        queue.add(jsonTodayRequest);
-*/
         RetrofitService networkService = RetrofitFactory.getRetrofitService();
 
-        Call<TodayWeather> todayWeatherCall = networkService.getTodayWeather("seoul", "json", "metric", API_KEY);
-        todayWeatherCall.enqueue(new Callback<TodayWeather>() {
+        networkService.getTodayWeather("seoul", "json", "metric", API_KEY).enqueue(new Callback<TodayWeather>() {
             @Override
             public void onResponse(Call<TodayWeather> call, Response<TodayWeather> response) {
                 if(response.isSuccessful()) {
@@ -79,11 +55,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<TodayWeather> call, Throwable t) {
                 t.printStackTrace();
-            }
-        });
+            }});
 
-        Call<DailyWeather> call = networkService.getDailyWeather("seoul", "json", "metric", API_KEY);
-        call.enqueue(new Callback<DailyWeather>() {
+        networkService.getDailyWeather("seoul", "json", "metric", API_KEY).enqueue(new Callback<DailyWeather>() {
             @Override
             public void onResponse(Call<DailyWeather> call, retrofit2.Response<DailyWeather> response) {
                 if(response.isSuccessful()) {
@@ -97,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<DailyWeather> call, Throwable t) {
                 t.printStackTrace();
-            }
-        });
+            }});
     }
 }
